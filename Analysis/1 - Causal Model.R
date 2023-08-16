@@ -12,18 +12,18 @@ pacman::p_load(
 # HR Treaty DAG
 node.info <- tribble(
   ~name, ~label, ~x, ~y,
-  "hrt", "Human Rights Treaty", 0, 0,
+  "hrt", "Human Rights Treaty", -1, 0,
   "rep", "Repression", 1, 0,
-  "ei", "Interdependence", -.25, 1,
-  "ingo", "INGOs", .75, -1,
-  "dem", "Democracy", 0.75, 1,
-  "exw", "External War", .25, 1,
-  "ji", "Judicial Independence", -.75, -1,
-  "ns", "Naming & Shaming", -.75, 1,
-  "pop", "Population", -.25, -1,
-  "vd", "Violent Dissent", -1, 0,
-  "dev", "Development", -1, -1,
-  "mil", "Military Size", 1, 1
+  "ei", "Interdependence", -1, 1,
+  "ingo", "INGOs", -1, -1,
+  "dem", "Democracy", -.5, .5,
+  "exw", "External War", 0, 1,
+  "ji", "Judicial Independence", 1, 1,
+  "ns", "Naming & Shaming", -.25, -1,
+  "pop", "Population", 1, -1,
+  "vd", "Violent Dissent", .75, .5,
+  "dev", "Development", -.5, -.5,
+  "mil", "Military Size", .25, -1 
 )
 
 ## Creating a Node Labels Object
@@ -76,11 +76,11 @@ hrt.dag.plot <-
     seed = 1234,
     color = "white",
     fontface = "bold",
-    box.padding = 3,
+    box.padding = 2.5,
     force = 2
   ) +
-  scale_color_manual(values = c("#42be71", "#228b8d", "#471164", "grey20", "grey")) +
-  scale_fill_manual(values = c("#42be71", "#228b8d", "#471164", "grey20", "grey")) +
+  scale_color_manual(values = c("#42be71", "#228b8d", "#471164", "grey20")) +
+  scale_fill_manual(values = c("#42be71", "#228b8d", "#471164", "grey20")) +
   guides(color = "none", fill = "none") +
   theme_dag()
 
