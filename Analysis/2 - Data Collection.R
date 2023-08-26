@@ -86,6 +86,12 @@ ucdp.inter <- ucdp.inter %>%
 final <- left_join(final, ucdp.inter,
                    by = c("ccode", "year"))
 
+# Merge Treaty Data
+treaties <- read_excel("Data/UN Treaty Status.xlsx")
+
+final <- left_join(final, treaties,
+                   by = c("ccode", "year"))
+
 ##### Load UCDP Intrastate Data #####
 ucdp.intra <- read_excel("Data/ucdp.23.1.intra.xlsx")
 

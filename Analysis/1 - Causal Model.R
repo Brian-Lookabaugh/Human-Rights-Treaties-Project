@@ -19,7 +19,6 @@ node.info <- tribble(
   "dem", "Democracy", -.5, .5,
   "exw", "External War", 0, 1,
   "ji", "Judicial Independence", 1, 1,
-  "ns", "Naming & Shaming", -.25, -1,
   "pop", "Population", 1, -1,
   "vd", "Violent Dissent", .75, .5,
   "dev", "Development", -.5, -.5,
@@ -32,8 +31,8 @@ names(node.labels) <- node.info$name
 
 ## Creating and Tidying the DAG Object
 hrt.dag <- dagify(
-  hrt ~ ei + dem + mil + ns + ingo,
-  rep ~ vd + ei + dem + hrt + ji + ingo + ns + mil,
+  hrt ~ ei + dem + mil + ingo,
+  rep ~ vd + ei + dem + hrt + ji + ingo + mil,
   ei ~ dem,
   ingo ~ dem,
   dem ~ pop,
@@ -56,7 +55,7 @@ hrt.dag <- hrt.dag %>%
     type = case_when(
       name == "hrt" ~ 1,
       name == "rep" ~ 2,
-      name %in% c("dem", "ei", "ingo", "mil", "ns") ~ 3,
+      name %in% c("dem", "ei", "ingo", "mil") ~ 3,
       name %in% c("dev", "pop", "vd", "ji", "exw") ~ 4
     )
   )
