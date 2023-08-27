@@ -42,6 +42,7 @@ vdem <- vdem %>%
   mutate(lpop = log(pop + 1)) %>%
   mutate(lexports = log(exports + 1)) %>%
   mutate(limports = log(imports + 1)) %>%
+  mutate(t.bal = exports - imports) %>%
   # Drop Unlogged Variables
   select(-c(gdppc, pop, exports, imports))
 
@@ -51,8 +52,7 @@ nmc <- read.csv("Data/NMC-60-abridged.csv")
 nmc <- nmc %>%
   select(ccode, year, milper) %>%
   mutate(milper = replace(milper, milper == -9, NA)) %>%
-  mutate(lmilper = log(milper + 1)) %>%
-  select(-c(milper))
+  mutate(lmilper = log(milper + 1))
 
 ### Merge the Data Sets
 final <- full_join(vdem, nmc, by = c("ccode", "year"))
