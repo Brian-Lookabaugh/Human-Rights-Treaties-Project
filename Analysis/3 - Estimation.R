@@ -5,10 +5,10 @@
 library(PanelMatch)
 
 ### For Each Dependent Variable Matrix of Combinations is:
-###                                     | 1-Year Lag | 2-Year Lag | 3-Year Lag | 4-Year Lag |
-### Mahalanobis                         |            |            |            |            |
-### Propensity Score Matching           |            |            |            |            |
-### Propensity Score Weighting          |            |            |            |            |
+###                                     | 1-Year Lag | 2-Year Lag | 3-Year Lag | 
+### Mahalanobis                         |            |            |            |
+### Propensity Score Matching           |            |            |            |
+### Propensity Score Weighting          |            |            |            |
 
 ### Data Cleaning for Panel Match
 final <- final %>%
@@ -88,26 +88,6 @@ phy.mah.3 <- PanelMatch(
   restrict.control.period = 3
 )
 
-phy.mah.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "ICCPR",
-  refinement.method = "mahalanobis",
-  size.match = 1,
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "p.vio",
-  use.diagonal.variance.matrix = TRUE,
-  restrict.control.period = 4
-)
-
 phy.psm.1 <- PanelMatch(
   lag = 1,
   time.id = "year",
@@ -165,25 +145,6 @@ phy.psm.3 <- PanelMatch(
   restrict.control.period = 3
 )
 
-phy.psm.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "ICCPR",
-  refinement.method = "ps.match",
-  size.match = 1,
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "p.vio",
-  restrict.control.period = 4
-)
-
 phy.psw.1 <- PanelMatch(
   lag = 1,
   time.id = "year",
@@ -236,24 +197,6 @@ phy.psw.3 <- PanelMatch(
   lead = 0:4,
   outcome.var = "p.vio",
   restrict.control.period = 3
-)
-
-phy.psw.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "ICCPR",
-  refinement.method = "ps.weight",
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "p.vio",
-  restrict.control.period = 4
 )
 
 ############################################################################
@@ -319,26 +262,6 @@ tor.mah.3 <- PanelMatch(
   restrict.control.period = 3
 )
 
-tor.mah.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CAT",
-  refinement.method = "mahalanobis",
-  size.match = 1,
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "torture",
-  use.diagonal.variance.matrix = TRUE,
-  restrict.control.period = 4
-)
-
 tor.psm.1 <- PanelMatch(
   lag = 1,
   time.id = "year",
@@ -396,25 +319,6 @@ tor.psm.3 <- PanelMatch(
   restrict.control.period = 3
 )
 
-tor.psm.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CAT",
-  refinement.method = "ps.match",
-  size.match = 1,
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "torture",
-  restrict.control.period = 4
-)
-
 tor.psw.1 <- PanelMatch(
   lag = 1,
   time.id = "year",
@@ -467,24 +371,6 @@ tor.psw.3 <- PanelMatch(
   lead = 0:4,
   outcome.var = "torture",
   restrict.control.period = 3
-)
-
-tor.psw.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CAT",
-  refinement.method = "ps.weight",
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "torture",
-  restrict.control.period = 4
 )
 
 ############################################################################
@@ -550,26 +436,6 @@ pol.mah.3 <- PanelMatch(
   restrict.control.period = 3
 )
 
-pol.mah.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CEDAW",
-  refinement.method = "mahalanobis",
-  size.match = 1,
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "w.pol.emp",
-  use.diagonal.variance.matrix = TRUE,
-  restrict.control.period = 4
-)
-
 pol.psm.1 <- PanelMatch(
   lag = 1,
   time.id = "year",
@@ -627,25 +493,6 @@ pol.psm.3 <- PanelMatch(
   restrict.control.period = 3
 )
 
-pol.psm.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CEDAW",
-  refinement.method = "ps.match",
-  size.match = 1,
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "w.pol.emp",
-  restrict.control.period = 4
-)
-
 pol.psw.1 <- PanelMatch(
   lag = 1,
   time.id = "year",
@@ -698,24 +545,6 @@ pol.psw.3 <- PanelMatch(
   lead = 0:4,
   outcome.var = "w.pol.emp",
   restrict.control.period = 3
-)
-
-pol.psw.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CEDAW",
-  refinement.method = "ps.weight",
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "w.pol.emp",
-  restrict.control.period = 4
 )
 
 ############################################################################
@@ -781,26 +610,6 @@ civ.mah.3 <- PanelMatch(
   restrict.control.period = 3
 )
 
-civ.mah.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CEDAW",
-  refinement.method = "mahalanobis",
-  size.match = 1,
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "w.civ.lib",
-  use.diagonal.variance.matrix = TRUE,
-  restrict.control.period = 4
-)
-
 civ.psm.1 <- PanelMatch(
   lag = 1,
   time.id = "year",
@@ -858,25 +667,6 @@ civ.psm.3 <- PanelMatch(
   restrict.control.period = 3
 )
 
-civ.psm.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CEDAW",
-  refinement.method = "ps.match",
-  size.match = 1,
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "w.civ.lib",
-  restrict.control.period = 4
-)
-
 civ.psw.1 <- PanelMatch(
   lag = 1,
   time.id = "year",
@@ -929,22 +719,4 @@ civ.psw.3 <- PanelMatch(
   lead = 0:4,
   outcome.var = "w.civ.lib",
   restrict.control.period = 3
-)
-
-civ.psw.4 <- PanelMatch(
-  lag = 4,
-  time.id = "year",
-  unit.id = "ccode",
-  treatment = "CEDAW",
-  refinement.method = "ps.weight",
-  data = final,
-  covs.formula = ~
-    I(lag(polity, 1:4)) +
-    I(lag(milper, 1:4)) +
-    I(lag(cso, 1:4)) +
-    I(lag(t.bal, 1:4)),
-  qoi = "att",
-  lead = 0:4,
-  outcome.var = "w.civ.lib",
-  restrict.control.period = 4
 )
